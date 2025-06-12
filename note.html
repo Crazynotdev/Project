@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lire la note — SecretNote241</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Manrope', sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px 30px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 8px 40px rgba(0, 255, 195, 0.1);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h1 {
+      font-size: 2rem;
+      background: linear-gradient(90deg, #00ffc3, #00c2ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+    }
+
+    .bubble {
+      background: #101010;
+      border-left: 4px solid #00ffc3;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: left;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-top: 20px;
+      box-shadow: 0 0 12px rgba(0, 255, 200, 0.1);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .footer {
+      margin-top: 30px;
+    }
+
+    .footer a {
+      text-decoration: none;
+      color: #00ffc3;
+      font-weight: bold;
+    }
+
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      background: #1a1a1a;
+      color: white;
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 12px 24px;
+      border-radius: 30px;
+      background: #00ffc3;
+      color: #000;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background: #00e6b0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🔐 Note Secrète</h1>
+
+    <div id="passwordPrompt" class="hidden">
+      <input type="password" id="passwordInput" placeholder="Entre le mot de passe...">
+      <button onclick="validatePassword()">Valider</button>
+    </div>
+
+    <div id="messageBox" class="bubble hidden"></div>
+
+    <div id="afterRead" class="footer hidden">
+      <p>💣 Ce message s’auto-détruit après lecture.</p>
+      <a href="create.html">✍️ Crée ta propre note secrète</a>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const message = decodeURIComponent(params.get("m") || "");
+    const password = decodeURIComponent(params.get("p") || "");
+    const once = params.get("o") === "1";
+
+    const passwordPrompt = document.getElementById("passwordPrompt");
+    const passwordInput = document.getElementById("passwordInput");
+    const messageBox = document.getElementById("messageBox");
+    const afterRead = document.getElementById("afterRead");
+
+    function showMessage(msg) {
+      messageBox.textContent = msg;
+      messageBox.classList.remove("hidden");
+      afterRead.classList.remove("hidden");
+
+      if (once) {
+        setTimeout(() => {
+          messageBox.textContent = "💨 Ce message a été détruit après lecture.";
+          afterRead.innerHTML = `<a href="create.html">↩️ Créer une nouvelle note</a>`;
+        }, 8000);
+      }
+    }
+
+    function validatePassword() {
+      if (passwordInput.value.trim() === password) {
+        passwordPrompt.classList.add("hidden");
+        showMessage(message);
+      } else {
+        alert("Mot de passe incorrect !");
+      }
+    }
+
+    if (password) {
+      passwordPrompt.classList.remove("hidden");
+    } else {
+      showMessage(message);
+    }
+  </script>
+
+</body>
+</html>
