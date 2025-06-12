@@ -1,192 +1,92 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SecretNote241 — Secrets anonymes & confidentiels 🇬🇦</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SecretNote241 — Anonyme & Gaboma</title>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary: #00ffc3;
-      --bg: #0d0d0d;
-      --text: #e5e5e5;
-      --muted: #aaaaaa;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Manrope', sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    header {
-      height: 100vh;
-      background: linear-gradient(145deg, #0e0e0e 30%, #1a1a1a);
+      background: radial-gradient(circle at 20% 20%, #00ffc3, #000000);
+      color: #fff;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       text-align: center;
-      padding: 40px 20px;
+      padding: 30px 20px;
     }
-
-    header h1 {
-      font-size: 3rem;
+    h1 {
+      font-size: 2.8rem;
       background: linear-gradient(90deg, #00ffc3, #00c2ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 20px;
+      animation: float 2s infinite ease-in-out;
     }
-
-    header p {
-      font-size: 1.1rem;
-      max-width: 600px;
-      color: var(--muted);
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
-
-    .cta {
+    p {
+      font-size: 1.2rem;
+      margin-top: 15px;
+      color: #e0e0e0;
+    }
+    ul {
       margin-top: 30px;
+      list-style: none;
+      text-align: left;
+      max-width: 400px;
     }
-
-    .cta a {
-      background: var(--primary);
-      color: #000;
+    ul li {
+      margin-bottom: 12px;
+      font-size: 1rem;
+    }
+    a.button {
+      margin-top: 40px;
+      display: inline-block;
       padding: 14px 28px;
-      border-radius: 40px;
-      font-weight: 600;
-      font-size: 1rem;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 15px rgba(0, 255, 195, 0.4);
-    }
-
-    .cta a:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 25px rgba(0, 255, 195, 0.6);
-    }
-
-    section {
-      padding: 80px 20px;
-      text-align: center;
-    }
-
-    section h2 {
-      font-size: 2.2rem;
-      color: var(--primary);
-      margin-bottom: 20px;
-    }
-
-    section p {
-      font-size: 1rem;
-      color: var(--muted);
-      max-width: 600px;
-      margin: auto;
-    }
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      margin-top: 50px;
-    }
-
-    .feature {
-      background: #141414;
-      border-radius: 12px;
-      padding: 20px;
-      border: 1px solid #222;
-      box-shadow: 0 0 10px rgba(0, 255, 195, 0.05);
-      transition: 0.3s;
-    }
-
-    .feature:hover {
-      box-shadow: 0 0 15px rgba(0, 255, 195, 0.15);
-      transform: translateY(-4px);
-    }
-
-    .feature span {
-      font-size: 1.6rem;
-      display: block;
-      margin-bottom: 10px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 40px 20px;
-      font-size: 0.9rem;
-      color: #777;
-    }
-
-    footer a {
-      color: var(--primary);
-      text-decoration: none;
+      background: #00ffc3;
+      color: #000;
+      border-radius: 30px;
       font-weight: bold;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: background 0.3s;
     }
-
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2rem;
-      }
-
-      section h2 {
-        font-size: 1.5rem;
-      }
+    a.button:hover {
+      background: #00e6b5;
+    }
+    footer {
+      margin-top: 50px;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+    footer a {
+      color: #00ffc3;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
+  <h1>🎉 SecretNote241</h1>
+  <p>Le coin des secrets made in 🇬🇦 Gabon</p>
 
-  <header>
-    <h1>SecretNote241 🇬🇦</h1>
-    <p>Le site gabonais pour envoyer des messages <strong>anonymes, protégés et éphémères</strong> à tes amis. Gratuit, rapide, sans inscription.</p>
-    <div class="cta">
-      <a href="create.html">✨ Créer ma note secrète</a>
-    </div>
-  </header>
+  <ul>
+    <li>💌 Envoie des notes anonymes, drôles ou codées</li>
+    <li>🔐 Protège-les avec un mot de passe</li>
+    <li>💣 Lecture unique & auto-destruction</li>
+    <li>📲 Partage via WhatsApp ou Snap</li>
+    <li>⚡ 100% gratuit et sans inscription</li>
+  </ul>
 
-  <section>
-    <h2>Fonctionnalités puissantes</h2>
-    <p>Conçu pour ceux qui veulent partager… sans se faire repérer. Tout est sécurisé, sans traces.</p>
-
-    <div class="features">
-      <div class="feature">
-        <span>📲</span>
-        Lien court & partage WhatsApp rapide
-      </div>
-      <div class="feature">
-        <span>🔐</span>
-        Mot de passe facultatif
-      </div>
-      <div class="feature">
-        <span>💣</span>
-        Auto-destruction après lecture
-      </div>
-      <div class="feature">
-        <span>👻</span>
-        Zéro trace, zéro identité
-      </div>
-      <div class="feature">
-        <span>🌐</span>
-        Dispo sur tous les téléphones
-      </div>
-      <div class="feature">
-        <span>🇬🇦</span>
-        Créé pour les jeunes du 241
-      </div>
-    </div>
-  </section>
+  <a href="create.html" class="button">✍️ Créer une note secrète</a>
 
   <footer>
-    Made with ❤️ au Gabon — <a href="https://wa.me/TONNUMERO">📢 Rejoins notre canal WhatsApp</a>
+    🔗 <a href="https://wa.me/YOURNUMBER">Rejoins la communauté WhatsApp</a>
   </footer>
-
 </body>
 </html>
