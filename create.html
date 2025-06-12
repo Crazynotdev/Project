@@ -1,100 +1,114 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
   <title>Créer une note — SecretNote241</title>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body {
-      background-color: #0d0d0d;
-      color: #f1f1f1;
+      margin: 0;
       font-family: 'Manrope', sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+      color: white;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       padding: 20px;
     }
+
     .container {
-      width: 100%;
-      max-width: 500px;
-      background: #141414;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
       padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 25px rgba(0,255,200,0.05);
-    }
-    h1 {
+      max-width: 500px;
+      width: 100%;
       text-align: center;
+      box-shadow: 0 0 20px rgba(0, 255, 195, 0.1);
+    }
+
+    h1 {
       font-size: 1.8rem;
+      margin-bottom: 20px;
       background: linear-gradient(90deg, #00ffc3, #00c2ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 20px;
     }
+
     textarea, input {
       width: 100%;
       padding: 12px;
-      border: none;
       border-radius: 10px;
-      margin-top: 15px;
-      background: #1e1e1e;
-      color: #fff;
-      resize: none;
-    }
-    button {
-      width: 100%;
-      padding: 14px;
-      margin-top: 20px;
       border: none;
+      background: #1a1a1a;
+      color: white;
+      font-size: 1rem;
+      margin-bottom: 15px;
+    }
+
+    button {
+      padding: 12px 24px;
       border-radius: 30px;
       background: #00ffc3;
       color: #000;
+      border: none;
       font-weight: bold;
-      font-size: 1rem;
       cursor: pointer;
+      font-size: 1rem;
     }
-    button:hover {
-      background: #00e6b5;
-    }
-    #linkBox {
+
+    .output {
       margin-top: 20px;
-      word-break: break-all;
-      background: #1e1e1e;
-      padding: 15px;
-      border-radius: 10px;
+      word-break: break-word;
+      font-size: 0.95rem;
+    }
+
+    a {
+      color: #00ffc3;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>✍️ Ta note secrète</h1>
-    <textarea id="note" rows="5" placeholder="Écris ton message ici..."></textarea>
-    <input type="text" id="password" placeholder="🔐 Mot de passe (optionnel)">
-    <label><input type="checkbox" id="once"> Lecture unique</label>
-    <button onclick="generateLink()">Générer le lien</button>
-
-    <div id="linkBox" style="display:none;"></div>
+    <h1>✍️ Crée ta note secrète</h1>
+    <textarea id="message" placeholder="Écris ton message ici..." rows="5"></textarea>
+    <input type="password" id="password" placeholder="Mot de passe (optionnel)" />
+    <label><input type="checkbox" id="once" /> Lecture unique</label><br><br>
+    <button onclick="generateLink()">Créer le lien</button>
+    <div class="output" id="linkBox"></div>
   </div>
 
   <script>
+    function generateID(length = 10) {
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      let id = "";
+      for (let i = 0; i < length; i++) {
+        id += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return id;
+    }
+
     function generateLink() {
-      const message = encodeURIComponent(document.getElementById("note").value.trim());
-      const password = encodeURIComponent(document.getElementById("password").value.trim());
-      const once = document.getElementById("once").checked ? "1" : "0";
+      const message = document.getElementById("message").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const once = document.getElementById("once").checked;
 
       if (!message) {
-        alert("Écris un message avant de générer !");
+        alert("Le message est vide !");
         return;
       }
 
-      let link = `https://secret241.vercel.app/note.html?m=${message}`;
-      if (password) link += `&p=${password}`;
-      if (once === "1") link += `&o=1`;
+      const id = generateID();
+      const data = { message, password, once };
+      localStorage.setItem("note-" + id, JSON.stringify(data));
 
-      const box = document.getElementById("linkBox");
-      box.style.display = "block";
-      box.innerHTML = `<p>🔗 Voici ton lien :</p><p><a href="${link}" target="_blank">${link}</a></p>`;
+      const url = `${window.location.origin}/note.html?id=${id}`;
+      document.getElementById("linkBox").innerHTML = `
+        🔗 <a href="${url}" target="_blank">${url}</a><br><br>
+        ✅ Copie ce lien et envoie-le sur WhatsApp !
+      `;
     }
   </script>
 </body>
